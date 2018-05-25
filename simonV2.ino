@@ -1,22 +1,22 @@
-int pattern[50];
+int pattern[50];  //you can always make the max value higher
 int player_pattern[50];
 int level = 1;
 
 void setup() {
-  pinMode(2,OUTPUT);
-  pinMode(3,OUTPUT);
-  pinMode(4,OUTPUT);
-  pinMode(5,OUTPUT);
+  pinMode(2,OUTPUT);  //these are the led lights, this one is red
+  pinMode(3,OUTPUT);  //green
+  pinMode(4,OUTPUT);  //blue
+  pinMode(5,OUTPUT);  //yellow
   
-  pinMode(A0,INPUT);
-  pinMode(A1,INPUT);
-  pinMode(A2,INPUT);
-  pinMode(A3,INPUT);
+  pinMode(A0,INPUT);  //output pins to check the button inputs, this one is for the red
+  pinMode(A1,INPUT);  //for green
+  pinMode(A2,INPUT);  //for blue
+  pinMode(A3,INPUT);  //for yellow
 
 }
 
 void loop() {
-  if (level == 1){
+  if (level == 1){  //makes a new pattern once the player gets the pattern wrong
     make();
   }
   
@@ -28,7 +28,7 @@ void loop() {
 
 }
 
-void show(){
+void show(){  //goes through the pattern untill it reaches the 'level' the player is on
   for(int i=0;i<level;i++){
     digitalWrite(pattern[i],HIGH);
     delay(300);
@@ -99,12 +99,12 @@ void check(){
 }
 
 
-void make(){
+void make(){  //makes a random list of 50 numbers
 randomSeed(millis());
 
-for (int i = 0; i < 50; i++){
+for (int i=0; i<50; i++){
   pattern[i] = random(2,6);
-}
+  }
 }
 
 void wrong(){  //shows the wrong sequence
@@ -119,4 +119,3 @@ void wrong(){  //shows the wrong sequence
   digitalWrite(5,LOW);
   level = 1;
 }
-
