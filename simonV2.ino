@@ -1,6 +1,7 @@
 int pattern[50];  //you can always make the max value higher
 int player_pattern[50];
 int level = 1;
+int yn = 0;
 
 void setup() {
   pinMode(2,OUTPUT);  //these are the led lights, this one is red
@@ -37,7 +38,6 @@ void show(){  //goes through the pattern untill it reaches the 'level' the playe
 }
 
 void check(){
-  int yn = 0;
 
   for (int i=0; i<level; i++){
     yn = 0;
@@ -119,3 +119,38 @@ void wrong(){  //shows the wrong sequence
   digitalWrite(5,LOW);
   level = 1;
 }
+
+void checkbutton(){  //test to make the code up there in the check button simpler. Not sure if it would work
+  for(int i=0;i<4;i++){
+    if (i == 1){
+      whichB = A0;
+      whichLED = 2;
+    }
+    if (i == 2){
+      whichB = A1;
+      whichLED = 3;
+    }
+    if (i == 3){
+      whichB = A2;
+      whichLED = 4;
+    }
+    if (i == 4){
+      whichB = A3;
+      whichLED = 5;
+    }
+    if (digitalRead(whichB) == LOW){
+          digitalWrite(whichLED,HIGH);
+          player_pattern[i] = whichLed;
+          yn = 1;
+          delay(150);
+          if (player_pattern[i] != pattern[i]){
+            wrong();
+            return;
+          }
+          digitalWrite(whichLED,LOW);
+          }
+    if(i == 4){
+      i = 0;
+    }
+    }
+  }
